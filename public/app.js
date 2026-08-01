@@ -52,8 +52,13 @@ window.addEventListener('world3d-ready',()=>{window.World3D.setReducedMotion(acc
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const sessionKey=code=>`turista-session:${String(code||'').toUpperCase()}`;
 function credentials(){const code=$('#code').value.trim().toUpperCase();return{name:$('#name').value.trim(),code,reconnectToken:code?localStorage.getItem(sessionKey(code)):null}}
-$('#create').onclick=()=>socket.emit('create',credentials()); $('#join').onclick=()=>socket.emit('join',credentials());
-$('#start').onclick=()=>socket.emit('start'); $('#copy').onclick=async()=>{await navigator.clipboard.writeText(`${location.origin}/?room=${state.code}`);toast('Enlace copiado')};
+function enterFullscreen(){
+  if(document.fullscreenElement||document.webkitFullscreenElement)return;
+  const root=document.documentElement,request=root.requestFullscreen||root.webkitRequestFullscreen;
+  if(request)Promise.resolve(request.call(root)).catch(()=>{});
+}
+$('#create').onclick=()=>{enterFullscreen();socket.emit('create',credentials())}; $('#join').onclick=()=>{enterFullscreen();socket.emit('join',credentials())};
+$('#start').onclick=()=>{enterFullscreen();socket.emit('start')}; $('#copy').onclick=async()=>{await navigator.clipboard.writeText(`${location.origin}/?room=${state.code}`);toast('Enlace copiado')};
 socket.on('errorMessage',toast); function toast(x){$('#toast').textContent=x;$('#toast').classList.add('show');setTimeout(()=>$('#toast').classList.remove('show'),2500)}
 socket.on('offers',offers=>{tradeOffers=offers;renderOffers()});socket.on('offerNotification',offer=>{toast(`${offer.buyerName} envió una oferta por ${offer.propertyName}`);$('#offersPanel').hidden=false});socket.on('offerResult',result=>toast(result.accepted?`Oferta aceptada: ahora posees ${result.propertyName}`:`Oferta rechazada por ${result.propertyName}${result.reason?`: ${result.reason}`:''}`));
 socket.on('gameToast',notice=>{if(['double','turn'].includes(notice.type)||['¡Pasaporte recuperado!','Sigue Deportado','Multa obligatoria','¡Dados dobles!'].includes(notice.title)){queuedDiceNotices.push(notice);return}if(notice.type==='rent'){queuedArrivalNotices.push(notice);setTimeout(()=>{if(!animating)flushArrivalNotices()},120);return}showGameToast(notice)});function showGameToast(notice){let stack=$('#gameNotifications');if(!stack){stack=document.createElement('div');stack.id='gameNotifications';stack.className='game-notifications';document.body.appendChild(stack)}const item=document.createElement('article');item.className=`game-notification ${notice.type||'info'}`;item.innerHTML=`<b>${esc(notice.title)}</b><span>${esc(notice.text)}</span>`;stack.appendChild(item);requestAnimationFrame(()=>item.classList.add('visible'));setTimeout(()=>{item.classList.remove('visible');setTimeout(()=>item.remove(),350)},4200)}
