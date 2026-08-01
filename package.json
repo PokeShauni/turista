@@ -1,0 +1,20 @@
+{
+  "name": "vuelta-al-mundo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Juego de mesa multijugador en tiempo real",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "socket.io-client": "^4.8.3"
+  }
+}
