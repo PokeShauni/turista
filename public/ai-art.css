@@ -1,0 +1,80 @@
+.drawn-card-face.fax { background: #063c2d url('/assets/ai/card-correo-web.jpg') center / cover no-repeat; }
+.drawn-card-face.email { background: #10265c url('/assets/ai/card-mensaje-web.jpg') center / cover no-repeat; }
+.drawn-card-face::after { content: ''; position: absolute; inset: 19% 8% 15%; z-index: 0; border-radius: 18px; background: #071e1bc4; box-shadow: 0 0 35px #0005; }
+.drawn-card-face > * { position: relative; z-index: 1; text-shadow: 0 2px 5px #000; }
+
+/* The travelers drawer exists only on touch/mobile layouts. */
+.travelers-toggle,
+.travelers-backdrop { display: none; }
+
+@media (min-width: 1101px) {
+  body:has(#game:not([hidden])) { height: 100vh; overflow: hidden; }
+  #game { width: 100%; max-width: none; height: 100vh; margin: 0; }
+}
+
+/* Keep long traveler names inside the desktop sidebar. */
+#players .player { min-width: 0; }
+#players .player > div { min-width: 0; overflow: hidden; }
+#players .player > div > b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#players .player > small { flex: 0 1 auto; min-width: 0; white-space: nowrap; }
+
+.group-property.other-owned { opacity: 1; border-color: var(--owner-color, #176c69); background: #f4ecda; }
+.group-owner { display: inline-flex; align-items: center; gap: 6px; color: #354a43; font-size: 9px; letter-spacing: 0; }
+.group-owner i { width: 10px; height: 10px; flex: none; border: 2px solid #fff; border-radius: 50%; background: var(--owner-color); box-shadow: 0 0 0 1px #18332c55; }
+
+.turn-callout { position: fixed; z-index: 91; top: 72px; left: 50%; display: flex; width: min(390px, calc(100vw - 32px)); flex-direction: column; align-items: center; gap: 2px; padding: 10px 24px; transform: translateX(-50%); border: 2px solid #fff8e9; border-radius: 15px; background: #176c69; color: #fff; box-shadow: 0 6px 0 #0b4643, 0 15px 35px #001d1977; cursor: pointer; }
+.turn-callout[hidden] { display: none; }
+.turn-callout span { font-size: 9px; font-weight: 900; letter-spacing: .16em; }
+.turn-callout b { font: 800 22px/1.05 Fraunces; }
+.turn-callout small { font-size: 9px; opacity: .82; }
+.turn-callout.finish { background: #e8583f; box-shadow: 0 6px 0 #a93625, 0 15px 35px #001d1977; }
+.turn-callout.announce { animation: turn-callout-arrive .65s cubic-bezier(.2,.9,.25,1.3), turn-callout-pulse 1.25s .7s ease-in-out 3; }
+#controls:has(button:not(:disabled)) button { animation: action-button-pulse 1.2s ease-in-out infinite; }
+
+.trade-buildings { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin: 4px 0 10px; }
+.trade-buildings span { display: flex; flex-direction: column; align-items: center; padding: 6px 3px; border-radius: 7px; background: #e9dfca; color: #52655e; font-size: 8px; }
+.trade-buildings b { color: #18332c; font-size: 13px; }
+
+@keyframes turn-callout-arrive { from { opacity: 0; transform: translate(-50%, -24px) scale(.82); } }
+@keyframes turn-callout-pulse { 50% { transform: translateX(-50%) scale(1.045); filter: brightness(1.12); } }
+@keyframes action-button-pulse { 50% { transform: translateY(-3px) scale(1.035); filter: brightness(1.08); } }
+
+@media (pointer: coarse) and (orientation: landscape) and (max-width: 1100px) {
+  .travelers-toggle { display: flex; }
+  .travelers-backdrop { display: block; }
+  .turn-callout { top: 6px; bottom: auto; width: min(330px, 42vw); padding: 7px 16px; }
+  .turn-callout b { font-size: 17px; }
+  .turn-callout small { display: none; }
+}
+
+html.reduced-motion .turn-callout,
+html.reduced-motion #controls button { animation: none !important; }
+
+.special-face,
+.debt-window { position: relative; }
+.spectator-modal-close,
+.drawn-card-face .spectator-modal-close {
+  position: absolute;
+  z-index: 8;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #ffffff77;
+  border-radius: 50%;
+  background: #17332ddd;
+  color: #fff;
+  box-shadow: 0 5px 14px #0005;
+  font-size: 23px;
+  line-height: 1;
+  text-shadow: none;
+}
+.debt-help { margin: -5px 0 12px !important; font-size: 11px; }
+.debt-asset { min-height: 105px; }
+.debt-asset small,
+.debt-asset em { display: block; margin-top: 4px; font-size: 9px; line-height: 1.25; }
+.debt-asset em { color: #a33c34; font-style: normal; }
+.debt-asset.sell { box-shadow: inset 0 0 0 2px #d59a35; }
