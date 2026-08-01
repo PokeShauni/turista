@@ -15,9 +15,9 @@ app.use('/three-addons', express.static(path.join(__dirname, 'node_modules', 'th
 const rooms = new Map();
 const DATA_DIR=path.join(__dirname,'data'),ROOMS_FILE=process.env.ROOMS_FILE||path.join(DATA_DIR,'rooms.json');
 function persistRooms(){try{fs.mkdirSync(path.dirname(ROOMS_FILE),{recursive:true});const temporary=`${ROOMS_FILE}.tmp`;fs.writeFileSync(temporary,JSON.stringify([...rooms.values()],null,2),'utf8');fs.renameSync(temporary,ROOMS_FILE)}catch(error){console.error('No se pudieron guardar las salas:',error.message)}}
-function restoreRooms(){try{if(!fs.existsSync(ROOMS_FILE))return;const saved=JSON.parse(fs.readFileSync(ROOMS_FILE,'utf8'));if(!Array.isArray(saved))return;saved.forEach(room=>{if(!room?.code||!Array.isArray(room.players))return;room.players.forEach(player=>{player.connected=false;player.connectionId=null;statsOf(player)});room.chatMessages=room.chatMessages||[];room.log=room.log||[];room.offers=room.offers||[];room.debts=room.debts||[];room.buildings=room.buildings||{};room.mortgages=room.mortgages||{};roomSettings(room);rooms.set(room.code,room);if(room.status==='playing')pauseTurnForDisconnect(room)});console.log(`${rooms.size} sala(s) restaurada(s).`)}catch(error){console.error('No se pudieron restaurar las salas:',error.message)}}
-const COLORS = ['#ff6b55', '#2f80ed', '#27ae60', '#9b51e0', '#f2c94c', '#eb5757'];
+function restoreRooms(){try{if(!fs.existsSync(ROOMS_FILE))return;const saved=JSON.parse(fs.readFileSync(ROOMS_FILE,'utf8'));if(!Array.isArray(saved))return;saved.forEach(room=>{if(!room?.code||!Array.isArray(room.players))return;room.players.forEach(player=>{player.connected=false;player.connectionId=null;player.color=TOKEN_COLORS[player.token]||player.color;statsOf(player)});room.chatMessages=room.chatMessages||[];room.log=room.log||[];room.offers=room.offers||[];room.debts=room.debts||[];room.buildings=room.buildings||{};room.mortgages=room.mortgages||{};roomSettings(room);rooms.set(room.code,room);if(room.status==='playing')pauseTurnForDisconnect(room)});console.log(`${rooms.size} sala(s) restaurada(s).`)}catch(error){console.error('No se pudieron restaurar las salas:',error.message)}}
 const TOKENS = ['cat','frog','flower','block','plane','globe','owl','wartortle'];
+const TOKEN_COLORS={cat:'#62d4f2',frog:'#35a94b',flower:'#f35f9f',block:'#efb52f',plane:'#f4f5ef',globe:'#2457d6',owl:'#8b5a35',wartortle:'#78bde8'};
 const round500=value=>Math.max(500,Math.round(value/500)*500);
 const REFERENCE_RENTS={
   24000:[3000,9500,26000,72000,96000,120000],
@@ -192,7 +192,7 @@ io.on('connection', socket => {
   socket.use(([event],next)=>{const r=rooms.get(socket.data.room),allowed=['sendChat','toggleRoomPause','restartRoom','deleteRoom','finishRoom','kickPlayer','hostSkipCurrentTurn','setOptionalRule','setInitialMoney'];if(r?.manualPaused&&!allowed.includes(event)){socket.emit('errorMessage','La partida está pausada por el anfitrión.');return}next()});
   socket.on('create', ({name}) => {
     name=cleanName(name); if(!name) return socket.emit('errorMessage','Escribe tu nombre.');
-    const c=code(); const player={id:socket.id,name,color:COLORS[0],token:TOKENS[0],money:150000,position:0,jailed:0,bankrupt:false,connected:true,reconnectToken:reconnectKey(),connectionId:socket.id,cards:[],skipTurns:0,stats:defaultStats()};
+    const c=code(); const player={id:socket.id,name,color:TOKEN_COLORS[TOKENS[0]],token:TOKENS[0],money:150000,position:0,jailed:0,bankrupt:false,connected:true,reconnectToken:reconnectKey(),connectionId:socket.id,cards:[],skipTurns:0,stats:defaultStats()};
     const room={code:c,host:socket.id,status:'lobby',players:[player],turn:0,phase:'roll',resumePhase:null,debtResumePhase:null,gameNotice:null,dice:null,pending:null,owners:{},mortgages:{},buildings:{},debts:[],offers:[],chatMessages:[],log:[`${name} creó la sala.`],winner:null,card:null,drawnCard:null,deferredCardEffect:null,specialEvent:null,moveMode:null,decks:{fax:shuffledDeck('fax'),email:shuffledDeck('email')},doubles:0,extraTurn:false,settings:{turnDuration:0,disconnectGrace:30,initialMoney:150000,rules:{}},turnDeadline:null,turnPaused:false,manualPaused:false};roomSettings(room);
     rooms.set(c,room);attachPlayer(socket,room,player);emit(room);
   });
@@ -203,13 +203,13 @@ io.on('connection', socket => {
     if(returning){const oldId=returning.id,oldSocket=io.sockets.sockets.get(returning.connectionId);migratePlayerId(r,oldId,socket.id);returning.id=socket.id;if(oldSocket&&oldSocket.id!==socket.id)oldSocket.disconnect(true);attachPlayer(socket,r,returning);resumeTurnAfterReconnect(r,returning);log(r,`${returning.name} se reconectó.`);notify(r,'Jugador reconectado',`${returning.name} volvió a la partida.`,'success');emit(r);return;}
     if(r.status!=='lobby')return socket.emit('errorMessage','La partida ya empezó y no admite jugadores nuevos.');
     if(!name||r.players.length>=6)return socket.emit('errorMessage','Nombre inválido o sala llena.');
-    const player={id:socket.id,name,color:COLORS[r.players.length],token:TOKENS[r.players.length],money:roomSettings(r).initialMoney,position:0,jailed:0,bankrupt:false,connected:true,reconnectToken:reconnectKey(),connectionId:socket.id,cards:[],skipTurns:0,stats:defaultStats()};r.players.push(player);
+    const initialToken=TOKENS[r.players.length];const player={id:socket.id,name,color:TOKEN_COLORS[initialToken],token:initialToken,money:roomSettings(r).initialMoney,position:0,jailed:0,bankrupt:false,connected:true,reconnectToken:reconnectKey(),connectionId:socket.id,cards:[],skipTurns:0,stats:defaultStats()};r.players.push(player);
     attachPlayer(socket,r,player);log(r,`${name} se unió.`);emit(r);
   });
   socket.on('selectToken', (token, acknowledge) => {
     const r=rooms.get(socket.data.room);
     if(!r||r.status!=='lobby'||!TOKENS.includes(token)||r.players.some(p=>p.id!==socket.id&&p.token===token)){if(typeof acknowledge==='function')acknowledge(false);return;}
-    const p=r.players.find(p=>p.id===socket.id); if(p){p.token=token;emit(r);if(typeof acknowledge==='function')acknowledge(true);}
+    const p=r.players.find(p=>p.id===socket.id); if(p){p.token=token;p.color=TOKEN_COLORS[token];emit(r);if(typeof acknowledge==='function')acknowledge(true);}
   });
   socket.on('start', () => { const r=rooms.get(socket.data.room); if(!r||r.host!==socket.id||r.players.length<2)return; r.status='playing';startTurnClock(r);log(r,'Comienza la vuelta al mundo.'); emit(r); });
   socket.on('drawCard', type => {const r=rooms.get(socket.data.room);if(!r||current(r)?.id!==socket.id||r.phase!=='draw'||r.pending?.deck!==type)return;drawFromDeck(r,type,current(r));emit(r);});
