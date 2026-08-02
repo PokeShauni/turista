@@ -1,0 +1,9 @@
+{
+  "name": "Vuelta al Mundo",
+  "short_name": "Turista",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#17332c",
+  "theme_color": "#17332c"
+}
