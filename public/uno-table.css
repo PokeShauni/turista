@@ -1,0 +1,153 @@
+.uno-hand-wrap>span{display:none!important}#uno3d{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+body:has(#unoGame:not([hidden])) #hostRoomControls{left:16px!important;top:72px!important;bottom:auto!important}body:has(#unoGame:not([hidden])) #hostRoomControls>button{padding:9px 12px!important;font-size:8px!important}#unoGame>header .room-pill{margin-right:112px}.uno-host-panel .host-primary-actions{margin-bottom:22px}.uno-host-panel .host-player-list{margin-bottom:18px}
+body:has(#unoGame:not([hidden])) .accessibility-panel .wood-settings{display:none!important}body:has(#unoGame:not([hidden])) .chat-button{background:var(--accent)!important;box-shadow:0 5px 0 var(--accent-dark),0 12px 28px #001d1880!important}body:has(#unoGame:not([hidden])) .chat-panel>header{background:var(--accent-dark)!important}body:has(#unoGame:not([hidden])) .chat-panel>header small{color:var(--accent-soft)!important}body:has(#unoGame:not([hidden])) .chat-tabs button.active{color:var(--accent)!important}body:has(#unoGame:not([hidden])) .chat-panel form button{background:var(--accent)!important}body:has(#unoGame:not([hidden])) .chat-panel input:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px var(--accent-soft)}
+.uno-game.uno-color-choosing #uno3d{z-index:360;pointer-events:auto}.uno-game.uno-color-choosing #unoPlayModal{z-index:370;pointer-events:none;background:transparent;backdrop-filter:none}.uno-color-controls{position:fixed;inset:0;z-index:371;pointer-events:none}.uno-color-controls>.uno-modal-close{position:absolute;right:24px;top:72px;pointer-events:auto}.uno-color-controls>strong{position:absolute;left:50%;top:18%;padding:9px 14px;border-radius:999px;background:#21100ddd;color:#fff4c4;font-size:10px;letter-spacing:.14em;transform:translateX(-50%)}.uno-color-controls>.uno-call{position:absolute;left:50%;bottom:20%;padding:12px 18px;border-radius:12px;background:#f4eddb;color:#18332c;pointer-events:auto;transform:translateX(-50%)}
+@media (hover:hover) and (pointer:fine){
+  .uno-game{background:radial-gradient(ellipse at center,var(--accent),var(--accent-dark) 78%)}
+  .uno-game:before{display:none}
+  #uno3d{position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+  .uno-game>header{position:relative;z-index:12}.uno-table{z-index:9}
+  .uno-table{position:relative;display:block;height:calc(100dvh - 202px);isolation:isolate;pointer-events:none}
+  #unoPlayers{position:absolute;inset:0;z-index:12;height:auto;padding:0;background:none;color:#fff;overflow:visible;pointer-events:none}
+  .uno-player{position:absolute;display:flex;flex-direction:column;align-items:center;width:190px;margin:0;padding:0;background:none!important;filter:drop-shadow(0 8px 9px #0008);transform:translate(-50%,-50%)}
+  .uno-player.active{box-shadow:none}.uno-player.active .uno-player-badge{box-shadow:0 0 0 3px #ffd84a,0 0 24px #ffd84acc;animation:uno-turn-pulse 1.4s ease-in-out infinite}
+  .uno-player.seat-top{left:50%;top:15%}.uno-player.seat-top-left{left:27%;top:17%}.uno-player.seat-top-right{left:73%;top:17%}.uno-player.seat-left{left:13%;top:53%;transform:translate(-50%,-50%) rotate(12deg)}.uno-player.seat-right{left:87%;top:53%;transform:translate(-50%,-50%) rotate(-12deg)}
+  .uno-player.seat-left-high{left:13%;top:29%;transform:translate(-50%,-50%) rotate(9deg)}.uno-player.seat-left-low{left:10%;top:72%;transform:translate(-50%,-50%) rotate(14deg)}
+  .uno-player.seat-right-high{left:87%;top:29%;transform:translate(-50%,-50%) rotate(-9deg)}.uno-player.seat-right-low{left:90%;top:72%;transform:translate(-50%,-50%) rotate(-14deg)}
+  .uno-player.uno-self{position:fixed;left:18px;top:auto;bottom:18px;z-index:40;transform:none;align-items:flex-start;width:auto}.uno-player.uno-self .uno-player-badge{transform:scale(.92);transform-origin:left bottom}
+  .uno-player-badge{position:relative;z-index:3;display:grid;grid-template-columns:30px minmax(55px,auto) 25px;align-items:center;gap:7px;padding:6px 9px;border:2px solid #ffffffbb;border-radius:10px;background:linear-gradient(100deg,var(--player-color),#172f29 45%);color:#fff;box-shadow:0 5px 14px #000b;pointer-events:auto}
+  .uno-player-badge .token{transform:scale(.72)}.uno-player-badge b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}.uno-player-badge>span{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;background:#fff;color:#172f29;font-weight:900}.uno-player-badge em{position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);white-space:nowrap;color:#ffd84a;font-size:9px;font-weight:900}
+  .uno-opponent-hand{position:relative;width:155px;height:69px;margin-bottom:-6px}.uno-opponent-hand i{position:absolute;left:58px;bottom:0;display:grid;place-items:center;width:39px;height:57px;border:3px solid #fff;border-radius:6px;background:radial-gradient(ellipse,#ed3e2f 0 30%,#111 32% 54%,#e6bd28 56% 60%,#111 62%);color:#fff;font:900 7px Arial;font-style:normal;text-shadow:0 1px #000;box-shadow:0 3px 7px #0009;transform-origin:50% 120%;transform:translateX(calc((var(--back-index) - var(--back-center))*var(--back-spacing,13px))) rotate(calc((var(--back-index) - var(--back-center))*var(--back-angle,5deg)));transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .uno-center{position:absolute;left:50%;top:54%;z-index:3;width:390px;min-width:0;transform:translate(-50%,-50%)}
+  #unoStatus{position:absolute;left:50%;bottom:calc(100% + 55px);margin:0;transform:translateX(-50%);white-space:nowrap;box-shadow:0 7px 22px #0009}
+  .uno-piles{position:relative;z-index:3;gap:54px}.uno-pile-slot{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px}.uno-pile-slot>span{padding:4px 8px;border-radius:10px;background:#160b0bbb;color:#ffe7a3;font-size:8px;font-weight:900;letter-spacing:.14em}.discard-slot{width:104px;height:178px}.discard-slot>span{position:absolute;top:154px}
+  #unoDiscard{position:relative;width:104px;height:148px}.uno-discard-card{position:absolute;inset:0;transform:translate(calc((var(--discard-index) - 4)*2px),calc((var(--discard-index) - 4)*-1px)) rotate(calc((var(--discard-index) - 2)*4deg))}.uno-discard-card .uno-card{position:absolute;inset:0}
+  .uno-direction{display:none!important}
+  #unoActions{position:absolute;left:50%;top:calc(100% + 10px);z-index:8;transform:translateX(-50%);white-space:nowrap;pointer-events:auto}
+  .uno-hand-wrap{z-index:8;height:178px;padding-top:5px;background:transparent!important;pointer-events:none}
+  .uno-hand-wrap>span{display:none!important}
+  .uno-hand{height:172px;padding:17px 90px 6px;overflow:visible!important}
+  .uno-hand .uno-card{pointer-events:auto}
+  .uno-hand .uno-card{width:106px;height:150px;flex-basis:106px;padding:8px;border-width:5px;border-radius:15px}
+  .uno-hand .uno-card:before{inset:12px 4px;border-width:3px}.uno-hand .uno-card small{min-height:25px;font-size:7px}.uno-hand .uno-card>b{height:70px;font-size:40px}.uno-hand .uno-card>i{right:8px;bottom:6px;font-size:13px}
+  .uno-hand .uno-card{transition:transform .34s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,filter .3s ease!important}
+  .uno-hand.initial-deal .uno-card{animation:uno-card-deal .38s cubic-bezier(.2,.8,.3,1.25) backwards;animation-delay:calc(var(--uno-card-layer)*22ms)}
+  .uno-hand .uno-card:hover,.uno-hand .uno-card:focus{transform:translateY(-18px) scale(1.18) rotate(0)!important;filter:brightness(1.08);box-shadow:0 25px 40px #000c,0 0 0 3px #ffd84a!important}
+  .uno-hand .uno-card.uno-card-awaiting{visibility:hidden!important;opacity:0!important;pointer-events:none!important}.uno-hand .uno-card.uno-card-arrived{animation:uno-card-arrive-hand .48s cubic-bezier(.16,1,.3,1)!important}
+  .uno-pile-slot>.uno-card,#unoDiscard{opacity:0!important}.uno-pile-slot>.uno-card{pointer-events:auto}
+  .uno-discard-card:last-child{animation:uno-card-land .4s cubic-bezier(.2,.8,.3,1.2)}
+  .uno-center #unoActions:has(.uno-color-wheel){position:fixed;inset:0;z-index:80;display:grid;place-items:center;min-height:0;margin:0;background:#16070799;transform:none;backdrop-filter:blur(4px)}
+  .uno-color-dialog{position:relative;display:flex;flex-direction:column;align-items:center;gap:20px;padding:42px;border-radius:50%;background:radial-gradient(circle,#fff4c9 0 13%,#4b1715 14% 55%,transparent 56%);filter:drop-shadow(0 22px 55px #000)}
+  .uno-color-wheel{position:relative;display:grid!important;grid-template-columns:repeat(2,96px);grid-template-rows:repeat(2,96px);gap:6px;width:198px;height:198px;transform:rotate(45deg);animation:uno-color-arrive .35s cubic-bezier(.2,.9,.3,1.3)}
+  .uno-color-wheel>strong{position:absolute;left:50%;top:50%;z-index:5;display:grid;place-items:center;width:72px;height:72px;border:6px solid #fff;border-radius:50%;background:#24100d;color:#fff;font-size:9px;letter-spacing:.08em;text-align:center;transform:translate(-50%,-50%) rotate(-45deg);pointer-events:none}
+  .uno-color-wheel button{width:96px;height:96px;padding:0!important;border:5px solid #fff;border-radius:42% 12% 42% 12%;box-shadow:0 7px 0 #0005!important;transition:filter .15s,transform .15s}.uno-color-wheel button span{display:block;color:#fff;font-size:11px;text-shadow:0 2px #0008;transform:rotate(-45deg)}.uno-color-wheel button:hover{z-index:4;filter:brightness(1.25);transform:scale(1.08)}
+  @keyframes uno-turn-pulse{50%{box-shadow:0 0 0 5px #ffd84a77,0 0 34px #ffd84a}}
+  @keyframes uno-background-spin{to{background-position:center;transform:rotate(360deg)}}
+  @keyframes uno-table-pulse{50%{box-shadow:inset 0 0 130px #ff9e2d33,0 0 95px #dc3d3655}}
+  @keyframes uno-direction-clockwise{from{transform:translate(-50%,-50%) rotate(-18deg)}to{transform:translate(-50%,-50%) rotate(342deg)}}
+  @keyframes uno-direction-counterclockwise{from{transform:translate(-50%,-50%) rotate(198deg)}to{transform:translate(-50%,-50%) rotate(-162deg)}}
+  @keyframes uno-card-deal{from{opacity:0;transform:translateY(80px) scale(.65) rotate(0)}to{opacity:1}}
+  @keyframes uno-card-land{from{opacity:.2;transform:translate(-150px,-90px) rotate(-35deg) scale(1.35)}to{opacity:1}}
+  @keyframes uno-color-arrive{from{opacity:0;transform:rotate(20deg) scale(.25)}to{opacity:1;transform:rotate(45deg) scale(1)}}
+  @keyframes uno-card-arrive-hand{0%{opacity:0;transform:translateY(-80px) scale(1.35) rotate(-12deg)}65%{opacity:1;transform:translateY(-5px) scale(1.08) rotate(2deg)}100%{transform:translateY(var(--uno-card-drop,12px)) rotate(var(--uno-card-rotation,0deg))}}
+}
+.uno-victory-token{display:block;width:180px;height:150px;min-height:0;margin:-8px auto 0;filter:drop-shadow(0 12px 12px #0009);animation:none}
+
+
+@keyframes uno-announce-arrive{0%{opacity:0;transform:translateY(24px) scale(.55) rotate(-8deg)}70%{transform:translateY(-4px) scale(1.08) rotate(2deg)}100%{opacity:1;transform:none}}
+@keyframes uno-announce-pulse{0%,100%{box-shadow:0 7px 0 #7e160e,0 0 0 0 #ffd84a33,0 10px 30px #0009}50%{box-shadow:0 7px 0 #7e160e,0 0 0 9px #ffd84a44,0 0 34px #ffd84acc}}
+@keyframes uno-announce-shine{from{transform:translateX(-180%) rotate(24deg)}to{transform:translateX(260%) rotate(24deg)}}
+.uno-announce{position:relative;display:grid;grid-template-columns:42px auto;grid-template-rows:auto auto;align-items:center;column-gap:9px;min-width:190px;padding:9px 17px 9px 10px;border:3px solid #fff;border-radius:999px;background:linear-gradient(135deg,#ef3d2e 0 52%,#bd1d17 53%);color:#fff;overflow:hidden;text-align:left;text-shadow:0 2px #650b08;animation:uno-announce-arrive .42s cubic-bezier(.16,1,.3,1),uno-announce-pulse 1.05s ease-in-out .42s infinite}.uno-announce:after{content:'';position:absolute;inset:-30% auto -30% 0;width:38px;background:#fff8;filter:blur(5px);animation:uno-announce-shine 1.8s ease-in-out .5s infinite}.uno-announce>span{z-index:1;grid-row:1/3;display:grid;place-items:center;width:40px;height:40px;border:3px solid #ffd84a;border-radius:50%;background:#fff;color:#d82920;font:900 25px Fraunces;text-shadow:none}.uno-announce>b{z-index:1;font:900 15px Fraunces;letter-spacing:.04em}.uno-announce>small{z-index:1;color:#ffe9a5;font-size:7px;letter-spacing:.08em}.uno-announce:hover{filter:brightness(1.14);transform:translateY(-3px) scale(1.04)}.uno-announce.announced{background:linear-gradient(135deg,#249d58,#126b40);box-shadow:0 7px 0 #074c2b,0 0 28px #54e28eaa;animation:uno-announce-arrive .3s cubic-bezier(.16,1,.3,1)}.uno-announce.announced:after{display:none}.uno-announce.announced>span{border-color:#a8f4c5;color:#168047}.uno-announce:disabled{opacity:1;cursor:default}html.reduced-motion .uno-announce,html.reduced-motion .uno-announce:after{animation:none!important}
+
+@media (max-width:1100px),(pointer:coarse){
+  .uno-table{position:relative}.uno-center{position:relative;z-index:2}.uno-direction{display:flex;align-items:center;justify-content:center;gap:5px;margin:2px 0 6px;color:#ffd84a}.uno-direction.counterclockwise span{transform:scaleX(-1)}.uno-direction b{font-size:8px;letter-spacing:.1em}
+  #unoPlayers{position:fixed;left:5px;top:55px;z-index:25;display:flex;width:auto;height:auto;padding:4px;background:#071f1acc;overflow-x:auto;transform:none}
+  #unoPlayers .uno-player{display:flex;position:static;width:auto;margin:0 3px;padding:3px;transform:none}.uno-opponent-hand{display:none}.uno-player-badge{display:flex;align-items:center;gap:4px;color:#fff}.uno-player-badge .token{transform:scale(.58)}.uno-player-badge b{font-size:8px}.uno-player-badge>span{font-size:8px}.uno-player.uno-self{display:none}
+  .uno-pile-slot>span{font-size:7px;color:#fff}.discard-slot{height:auto}#unoDiscard{position:relative;width:76px;height:108px}.uno-discard-card{position:absolute;inset:0}.uno-discard-card .uno-card{width:76px;height:108px}
+}
+
+html.reduced-motion .uno-game:before,html.reduced-motion .uno-direction,html.reduced-motion .uno-hand .uno-card,html.reduced-motion .uno-discard-card:last-child{animation:none!important}
+
+@keyframes uno-playable-glow{0%,100%{box-shadow:0 12px 24px #0009,0 0 0 2px #fff8,0 0 12px #ffd84a99;filter:brightness(1)}50%{box-shadow:0 16px 30px #000b,0 0 0 4px #fff,0 0 26px 7px #ffd84add;filter:brightness(1.15)}}
+@keyframes uno-deck-call{0%,100%{color:#ffe7a3;box-shadow:0 0 0 0 #ffd84a00}50%{color:#fff;box-shadow:0 0 0 6px #ffd84a44,0 0 22px #ffd84acc}}
+@keyframes uno-playable-border{0%,100%{box-shadow:inset 0 0 0 2px #fff8,inset 0 0 10px #ffd84a66;opacity:.7}50%{box-shadow:inset 0 0 0 4px #fff,inset 0 0 20px #ffd84acc;opacity:1}}
+.uno-card>i.uno-corner-top{position:absolute;left:7px;top:5px;right:auto!important;bottom:auto!important;width:auto;text-align:left;font:900 14px Fraunces}.uno-hand .uno-card>i.uno-corner-top{left:5px;top:3px;right:auto!important;bottom:auto!important;font-size:10px}.uno-card>i.uno-corner-bottom{right:7px;bottom:5px}
+.uno-card.playable:after{content:'';position:absolute;inset:0;z-index:4;border:2px solid #ffd84a;border-radius:inherit;pointer-events:none;animation:uno-playable-border 1.15s ease-in-out infinite}
+.uno-hand .uno-card.playable{animation:uno-playable-glow 1.15s ease-in-out infinite!important}
+.uno-pile-slot:has(#unoDeck.draw-required)>span{animation:uno-deck-call .9s ease-in-out infinite;background:#8d4c00!important;color:#fff!important}
+html.reduced-motion .uno-hand .uno-card.playable{animation:none!important;box-shadow:0 12px 24px #0009,0 0 0 4px #fff,0 0 22px 5px #ffd84acc!important;filter:brightness(1.12)}
+html.reduced-motion .uno-card.playable:after{animation:none;box-shadow:inset 0 0 0 3px #fff,inset 0 0 16px #ffd84aaa;opacity:1}
+
+/* Arte de cartas HUGO: la ilustración aporta el acabado y el color sigue siendo semántico. */
+html[data-theme="classic"] .uno-card:not(.back){background-image:linear-gradient(#0001,#0004),url('/assets/cards/hugo-classic.png');background-size:cover;background-position:center;background-blend-mode:soft-light;border-color:#f7e7ae;box-shadow:0 10px 24px #0009,inset 0 0 0 2px #d5ad55}
+html[data-theme="cartoon"] .uno-card:not(.back){background-image:linear-gradient(#fff2,#0002),url('/assets/cards/hugo-cartoon.png');background-size:cover;background-position:center;background-blend-mode:soft-light;border-color:#fff4cb;border-radius:18px;box-shadow:0 10px 0 #17202aaa,0 14px 25px #0008,inset 0 0 0 2px #ffc52e}
+html[data-theme="anime"] .uno-card:not(.back){background-image:linear-gradient(#00152c33,#00152c66),url('/assets/cards/hugo-anime.png');background-size:cover;background-position:center;background-blend-mode:screen;border-color:#ecfbff;clip-path:polygon(4% 0,96% 0,100% 3%,100% 97%,96% 100%,4% 100%,0 97%,0 3%);box-shadow:0 8px 25px #001c42cc,inset 0 0 0 2px #79ddff}
+html[data-theme="classic"] .uno-card:not(.back):before{border-color:#f5d574;opacity:.72}
+html[data-theme="cartoon"] .uno-card:not(.back):before{border-width:4px;border-color:#fff5cf;opacity:.8}
+html[data-theme="anime"] .uno-card:not(.back):before{border-color:#b8f4ff;box-shadow:0 0 12px #83e9ff;opacity:.75}
+html[data-theme="classic"] .uno-card:not(.back)>b{font-family:Fraunces,serif;text-shadow:0 3px 2px #000b,0 0 10px #f5d57488}
+html[data-theme="cartoon"] .uno-card:not(.back)>b{font-family:Arial Rounded MT Bold,Arial,sans-serif;text-shadow:0 4px 0 #0008,0 0 12px #fff8}
+html[data-theme="anime"] .uno-card:not(.back)>b{font-family:Arial Black,Impact,sans-serif;font-style:italic;text-shadow:3px 3px 0 #082b52,0 0 14px #a9f2ff}
+html[data-theme="classic"] .uno-card.wild:not(.back){background-image:url('/assets/cards/hugo-classic.png'),conic-gradient(#dc3d36 0 25%,#e2b928 0 50%,#279b55 0 75%,#2875bc 0);background-blend-mode:screen,normal}
+html[data-theme="cartoon"] .uno-card.wild:not(.back){background-image:url('/assets/cards/hugo-cartoon.png'),conic-gradient(#dc3d36 0 25%,#e2b928 0 50%,#279b55 0 75%,#2875bc 0);background-blend-mode:screen,normal}
+html[data-theme="anime"] .uno-card.wild:not(.back){background-image:url('/assets/cards/hugo-anime.png'),conic-gradient(#dc3d36 0 25%,#e2b928 0 50%,#279b55 0 75%,#2875bc 0);background-blend-mode:screen,normal}
+html[data-theme="classic"] .uno-card.back,html[data-theme="classic"] .uno-opponent-hand i{background-image:linear-gradient(#0002,#0005),url('/assets/cards/hugo-classic.png');background-size:cover;background-position:center}
+html[data-theme="cartoon"] .uno-card.back,html[data-theme="cartoon"] .uno-opponent-hand i{background-image:linear-gradient(#0001,#0004),url('/assets/cards/hugo-cartoon.png');background-size:cover;background-position:center}
+html[data-theme="anime"] .uno-card.back,html[data-theme="anime"] .uno-opponent-hand i{background-image:linear-gradient(#00152c22,#00152c88),url('/assets/cards/hugo-anime.png');background-size:cover;background-position:center}
+html[data-theme="classic"] .uno-opponent-hand i{border-color:#e8cb79;color:#f7e7ae}
+html[data-theme="cartoon"] .uno-opponent-hand i{border-color:#fff0bf;color:#ffd449;border-radius:8px}
+html[data-theme="anime"] .uno-opponent-hand i{border-color:#c5f6ff;color:#a9efff;clip-path:polygon(5% 0,95% 0,100% 5%,100% 95%,95% 100%,5% 100%,0 95%,0 5%)}
+html[data-theme] .uno-card:not(.back):before{display:none}
+html[data-theme] .uno-card:not(.back)>b{position:absolute;inset:0;z-index:2;display:grid;place-items:center;width:100%;height:auto;margin:0;line-height:1;pointer-events:none}
+html[data-theme="classic"] .uno-card.back,html[data-theme="classic"] .uno-opponent-hand i{background-image:url('/assets/cards/hugo-back-classic.png')}
+html[data-theme="cartoon"] .uno-card.back,html[data-theme="cartoon"] .uno-opponent-hand i{background-image:url('/assets/cards/hugo-back-cartoon.png')}
+html[data-theme="anime"] .uno-card.back,html[data-theme="anime"] .uno-opponent-hand i{background-image:url('/assets/cards/hugo-back-anime.png')}
+html[data-theme] .uno-card.back,html[data-theme] .uno-opponent-hand i{background-size:cover;background-position:center;background-repeat:no-repeat}
+html[data-theme] .uno-opponent-hand i{color:transparent;text-shadow:none}
+html[data-theme] .uno-card.back>b{visibility:hidden}
+html[data-theme] .uno-card:not(.back)>small{position:absolute;left:13%;right:13%;top:7px;z-index:6;display:block;min-height:0;color:#fff!important;font:900 9px/1.1 Arial,sans-serif;text-align:center;letter-spacing:.025em;text-shadow:0 1px 3px #000,0 0 6px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+html[data-theme="anime"] .uno-card:not(.back)>b{transform:translate(-6%,2%)}
+html[data-theme="anime"] .uno-card.yellow:not(.back)>b{color:#f4fdff;text-shadow:3px 3px 0 #493600,0 0 14px #fff0a8}
+html[data-theme="anime"] .uno-card.yellow:not(.back)>small{color:#fff!important;text-shadow:0 1px 3px #4a3500,0 0 6px #4a3500}
+html[data-theme="classic"] .uno-card.yellow:not(.back)>b,html[data-theme="classic"] .uno-card.yellow:not(.back)>i,html[data-theme="cartoon"] .uno-card.yellow:not(.back)>b,html[data-theme="cartoon"] .uno-card.yellow:not(.back)>i{color:#fff;text-shadow:0 2px 2px #4a3100,0 0 7px #4a3100}
+@media (hover:hover) and (pointer:fine){html[data-theme] .uno-hand .uno-card:not(.back)>small{top:5px;font-size:8px}}
+
+/* Indicadores jugables adaptados a la silueta y materiales de cada tema. */
+@keyframes hugo-playable-classic{0%,100%{box-shadow:0 12px 24px #000a,0 0 0 2px #b98928,0 0 12px #ffd66a99;filter:brightness(1.03)}50%{box-shadow:0 16px 32px #000c,0 0 0 4px #fff0b2,0 0 28px 8px #eeb83ee6;filter:brightness(1.16)}}
+@keyframes hugo-playable-cartoon{0%,100%{box-shadow:0 9px 0 #17202aaa,0 14px 25px #0009,0 0 0 2px #ffbd20,0 0 14px #ffe36a99;filter:saturate(1.05)}50%{box-shadow:0 10px 0 #17202acc,0 17px 30px #000b,0 0 0 5px #fff6c9,0 0 30px 9px #ffc928e6;filter:saturate(1.22) brightness(1.1)}}
+@keyframes hugo-playable-anime{0%,100%{box-shadow:0 10px 25px #001c42cc;filter:brightness(1.08) drop-shadow(0 0 3px #e9fdff) drop-shadow(0 0 8px #37dfff)}50%{box-shadow:0 14px 32px #001229dd;filter:brightness(1.24) saturate(1.22) drop-shadow(0 0 6px #fff) drop-shadow(0 0 18px #31ddff) drop-shadow(0 0 28px #26aee8)}}
+@keyframes hugo-playable-outline{0%,100%{opacity:.66}50%{opacity:1}}
+html[data-theme="classic"] .uno-hand .uno-card.playable{animation:hugo-playable-classic 1.15s ease-in-out infinite!important}
+html[data-theme="cartoon"] .uno-hand .uno-card.playable{animation:hugo-playable-cartoon 1.05s cubic-bezier(.45,0,.55,1) infinite!important}
+html[data-theme="anime"] .uno-hand .uno-card.playable{animation:hugo-playable-anime .95s ease-in-out infinite!important}
+html[data-theme="classic"] .uno-card.playable:after{inset:2px;border:3px solid #ffe18a;border-radius:10px;box-shadow:inset 0 0 0 1px #6f481c,inset 0 0 13px #ffd15f99}
+html[data-theme="cartoon"] .uno-card.playable:after{inset:2px;border:4px solid #fff8d7;border-radius:14px;box-shadow:inset 0 0 0 3px #ffbd21,inset 0 0 14px #fff5a8aa}
+html[data-theme="anime"] .uno-card.playable:after{inset:1px;border:4px solid #e5fcff;border-radius:0;clip-path:polygon(4% 0,96% 0,100% 3%,100% 97%,96% 100%,4% 100%,0 97%,0 3%);box-shadow:inset 0 0 0 2px #36dff7,inset 0 0 24px #70ecffff;background:linear-gradient(135deg,#fff8,transparent 18%,transparent 78%,#55eaff88)}
+html[data-theme] .uno-card.playable:after{animation:hugo-playable-outline .9s ease-in-out infinite}
+html[data-theme] .uno-hand .uno-card.playable:hover,html[data-theme] .uno-hand .uno-card.playable:focus-visible{filter:brightness(1.16) saturate(1.12)!important}
+html[data-theme="classic"] .uno-hand .uno-card.playable:hover,html[data-theme="classic"] .uno-hand .uno-card.playable:focus-visible{box-shadow:0 25px 40px #000c,0 0 0 4px #fff0b2,0 0 30px 10px #eeb83eee!important}
+html[data-theme="cartoon"] .uno-hand .uno-card.playable:hover,html[data-theme="cartoon"] .uno-hand .uno-card.playable:focus-visible{box-shadow:0 10px 0 #17202acc,0 25px 40px #000c,0 0 0 5px #fff6d0,0 0 32px 10px #ffc928ee!important}
+html[data-theme="anime"] .uno-hand .uno-card.playable:hover,html[data-theme="anime"] .uno-hand .uno-card.playable:focus-visible{box-shadow:0 25px 40px #001229dd,0 0 0 4px #e7fdff,0 0 34px 11px #48dfffee!important}
+html[data-theme="anime"] .uno-hand .uno-card.playable:hover,html[data-theme="anime"] .uno-hand .uno-card.playable:focus-visible{filter:brightness(1.22) saturate(1.2) drop-shadow(0 0 7px #fff) drop-shadow(0 0 20px #35e4ff)!important}
+html.reduced-motion[data-theme] .uno-hand .uno-card.playable{animation:none!important;filter:brightness(1.12)!important}
+html.reduced-motion[data-theme="anime"] .uno-hand .uno-card.playable{filter:brightness(1.16) drop-shadow(0 0 5px #fff) drop-shadow(0 0 15px #35e4ff)!important}
+
+/* Modo daltónico HUGO: verde y azul nunca dependen únicamente del tono. */
+html.hugo-colorblind .uno-card.green:not(.back):before,html.hugo-colorblind .uno-card.blue:not(.back):before{content:'';display:block!important;position:absolute;inset:0;z-index:1;border:0;border-radius:inherit;transform:none;pointer-events:none}
+html.hugo-colorblind .uno-card.green:not(.back):before{background:repeating-linear-gradient(135deg,transparent 0 10px,#fff9 10px 13px,transparent 13px 22px);opacity:.42}
+html.hugo-colorblind .uno-card.blue:not(.back):before{background:radial-gradient(circle,#fff 0 2px,transparent 2.5px) 0 0/18px 18px;opacity:.38}
+html.hugo-colorblind .uno-card.green:not(.back)>small:before{content:'▲ ';color:#fff4a8;font-size:1.15em}
+html.hugo-colorblind .uno-card.blue:not(.back)>small:before{content:'◆ ';color:#fff4a8;font-size:1.15em}
+html.hugo-colorblind .uno-card:not(.back)>i{z-index:7}
+.hugo-colorblind-setting span{display:flex;flex-direction:column;gap:2px}.hugo-colorblind-setting span small{color:var(--accent);font-size:9px;font-weight:900}
+html.reduced-motion .uno-pile-slot:has(#unoDeck.draw-required)>span{animation:none;background:#8d4c00!important;box-shadow:0 0 0 5px #ffd84a55,0 0 20px #ffd84aaa}
+.uno-victory{position:fixed;inset:0;z-index:600;display:grid;place-items:center;padding:18px;background:radial-gradient(circle,#ffb52a55,#160306e8 62%);backdrop-filter:blur(8px)}.uno-victory[hidden]{display:none}.uno-victory-card{position:relative;display:flex;flex-direction:column;align-items:center;width:min(460px,calc(100vw - 30px));padding:34px 28px 30px;border:4px solid #fff4c4;border-radius:30px;background:linear-gradient(155deg,var(--winner-color),#8c1715 48%,#260609);color:#fff;overflow:hidden;text-align:center;box-shadow:0 26px 90px #000d,0 0 70px var(--winner-color)}.uno-victory-card>*:not(.uno-victory-rays){position:relative;z-index:2}.uno-victory-rays{position:absolute;inset:-70%;background:repeating-conic-gradient(#fff3 0 7deg,transparent 7deg 15deg);animation:uno-victory-spin 9s linear infinite}.uno-victory-crown{font-size:66px;line-height:1;color:#ffe26d;text-shadow:0 5px #8b4700,0 0 24px #fff}.uno-victory-card>small{margin-top:10px;font-weight:900;letter-spacing:.2em}.uno-victory-card>h1{margin:4px 0;font:900 clamp(38px,8vw,68px) Fraunces;text-shadow:0 5px #440a0a}.uno-victory-card>p{margin:0 0 12px;font-weight:800}.uno-victory-token{display:grid;place-items:center;min-height:62px;font-size:46px;filter:drop-shadow(0 8px 8px #0008);animation:uno-victory-bounce 1.1s ease-in-out infinite}.uno-victory-card>button{margin-top:12px;padding:13px 24px;border:3px solid #fff;border-radius:999px;background:#ffd84a;color:#401000;font-weight:1000;box-shadow:0 6px 0 #a85d00}.uno-victory-card>em{padding:10px 14px;border-radius:999px;background:#16060699;font-size:11px}@keyframes uno-victory-spin{to{transform:rotate(360deg)}}@keyframes uno-victory-bounce{50%{transform:translateY(-10px) scale(1.08)}}html.reduced-motion .uno-victory-rays,html.reduced-motion .uno-victory-token{animation:none}
+
+@media (hover:hover) and (pointer:fine){
+  .uno-hand{isolation:isolate;transform:translateX(var(--uno-hand-pan,0px));transition:transform .14s ease-out;will-change:transform}
+  .uno-hand .uno-card{will-change:transform;transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .24s ease,filter .24s ease!important}
+  .uno-hand:has(.uno-card:hover) .uno-card:has(~ .uno-card:hover),.uno-hand:has(.uno-card:focus-visible) .uno-card:has(~ .uno-card:focus-visible){transform:translateX(-48px) translateY(var(--uno-card-drop,12px)) rotate(var(--uno-card-rotation,0deg))!important}
+  .uno-hand .uno-card:hover ~ .uno-card,.uno-hand .uno-card:focus-visible ~ .uno-card{transform:translateX(48px) translateY(var(--uno-card-drop,12px)) rotate(var(--uno-card-rotation,0deg))!important}
+  .uno-hand .uno-card:hover,.uno-hand .uno-card:focus-visible{z-index:1000!important;transform:translateY(-18px) scale(1.14) rotate(0)!important;outline:3px solid #fff;outline-offset:3px}
+  .uno-hand .uno-card:hover:after,.uno-hand .uno-card:focus-visible:after{border-width:3px}
+}

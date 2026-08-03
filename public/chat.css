@@ -60,6 +60,7 @@ html[data-text-size="small"]{font-size:14px}html[data-text-size="normal"]{font-s
   body .property-dock .property-cards .deed.card-open .construction-status{margin:0 0 8px!important}
   body .property-dock .property-cards .deed.card-open .deed-photo{left:-15px!important;right:-15px!important;width:auto!important}
 }
+.confetti-layer{z-index:650}.confetti-layer i{animation-iteration-count:infinite;animation-timing-function:linear}
 @media (pointer:coarse) and (orientation:landscape) and (max-width:1100px){
   #propertyDock .property-cards{transform:translateX(var(--property-pan,0px));transition:transform .2s ease-out;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;will-change:transform}
   #propertyDock .property-cards.dragging{transition:none;cursor:grabbing}
@@ -122,3 +123,4 @@ html[data-text-size="small"]{font-size:14px}html[data-text-size="normal"]{font-s
   #propertyDock .property-cards.suppress-card-hover .deed.detailed:hover:not(.card-open),
   #propertyDock .property-cards.suppress-card-hover .deed.detailed.mortgaged:hover:not(.card-open){transform:translateY(120px) rotate(calc((var(--card-index) - 2) * 2deg)) rotateX(10deg)!important}
 }
+.confetti-layer{z-index:650}.confetti-layer i{animation-name:confetti-fall;animation-duration:var(--duration);animation-delay:var(--delay);animation-timing-function:linear;animation-iteration-count:infinite;animation-fill-mode:none}
