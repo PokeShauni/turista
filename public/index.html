@@ -1,5 +1,85 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vuelta al Mundo</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/effects.css"><link rel="stylesheet" href="/scene.css"><link rel="stylesheet" href="/webgl.css"><link rel="stylesheet" href="/special.css"><link rel="stylesheet" href="/trade.css"><link rel="stylesheet" href="/notifications.css"><link rel="stylesheet" href="/finance.css"><link rel="stylesheet" href="/development.css"><link rel="stylesheet" href="/ai-art.css"><script type="importmap">{"imports":{"three":"/three/three.module.js","three/addons/":"/three-addons/"}}</script></head><body><main>
-  <section id="home" class="home"><div class="stamp">PASAPORTE DE VIAJE</div><h1>Vuelta<br><em>al mundo</em></h1><p>Compra destinos, cobra rentas y conviértete en la persona más viajera.</p><input id="name" maxlength="18" placeholder="Tu nombre"><div class="actions"><button id="create">Crear partida</button><span>o</span><div class="join"><input id="code" maxlength="5" placeholder="CÓDIGO"><button id="join">Unirme</button></div></div><small>De 2 a 6 jugadores · Partida privada por enlace</small></section>
-  <section id="lobby" hidden><div class="panel"><span class="eyebrow">SALA DE EMBARQUE</span><h2>Código <b id="roomCode"></b></h2><button id="copy" class="secondary">Copiar enlace de invitación</button><h3 class="choose-title">Elige tu ficha</h3><div id="tokenPicker" class="token-picker"></div><div id="lobbyPlayers"></div><button id="start">Comenzar viaje</button><p id="hostHint"></p></div></section>
-  <section id="game" hidden><header><div><span class="eyebrow">VUELTA AL MUNDO</span><b id="turnText"></b></div><div class="room-pill">SALA <b id="gameCode"></b></div></header><div class="layout"><aside><h3>Viajeros</h3><div id="players"></div><h3>Bitácora</h3><div id="log"></div></aside><div id="boardStage" class="board-stage webgl-stage"><canvas id="world3d"></canvas><div class="camera-help">ARRASTRA PARA ROTAR · RUEDA PARA ZOOM</div><div class="scene-hud"><div id="dice"></div><div id="card"></div><div id="controls"></div></div><div id="board" class="logic-board" aria-hidden="true"></div></div></div><section id="propertyDock" class="property-dock"><div class="dock-label"><span>MIS ESCRITURAS</span><b id="propertyCount">0</b></div><div id="propertyCards" class="property-cards"></div></section></section>
-</main><button id="offersButton" class="offers-button" hidden onclick="toggleOffers()">OFERTAS <b id="offersCount">0</b></button><aside id="offersPanel" class="offers-panel" hidden><div class="offers-head"><h3>Mercado privado</h3><button onclick="toggleOffers()">×</button></div><div id="offersList"></div></aside><div id="tradeModal" class="trade-modal" hidden><div class="trade-window"><button class="trade-close" onclick="closeTrade()">×</button><span>PORTAFOLIO DE VIAJE</span><h2 id="tradePlayerName"></h2><div id="tradeProperties" class="trade-properties"></div><div id="offerComposer" class="offer-composer" hidden><small>OFERTA POR</small><h3 id="offerPropertyName"></h3><label>Cantidad que pagarás<input id="offerAmount" type="number" min="1" step="1000" placeholder="$0"></label><div><button class="secondary" onclick="cancelOffer()">Cancelar</button><button onclick="submitOffer()">Enviar oferta</button></div></div></div></div><div id="arrival" class="arrival" hidden><div class="arrival-card"><button class="close-arrival" aria-label="Cerrar">×</button><span id="arrivalType"></span><h2 id="arrivalName"></h2><div id="arrivalPrice"></div><p id="arrivalText"></p><div id="arrivalActions"></div></div></div><div id="specialModal" class="special-modal" hidden><div id="specialFace" class="special-face"><div id="specialIcon"></div><span>EVENTO DE VIAJE</span><h2 id="specialTitle"></h2><p id="specialText"></p><div id="specialAction"></div></div></div><div id="drawnCardModal" class="drawn-card-modal" hidden><article id="drawnCardFace" class="drawn-card-face"><div class="card-signal">● ● ●</div><span id="drawnCardDeck"></span><h2 id="drawnCardTitle"></h2><p id="drawnCardText"></p><small id="drawnCardPlayer"></small><div id="drawnCardAction"></div></article></div><div id="toast"></div><script src="/socket.io/socket.io.js"></script><script type="module" src="/world3d.js"></script><script src="/app.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#100b19">
+  <title>Una historia para ti</title>
+  <link rel="stylesheet" href="/cumpleanos.css">
+  <script type="importmap">{"imports":{"three":"/three/three.module.js"}}</script>
+</head>
+<body>
+  <main id="experience" aria-label="Tarjeta de cumpleaños interactiva">
+    <canvas id="birthdayCanvas"></canvas>
+
+    <section class="loading-screen" id="loadingScreen" aria-live="polite">
+      <div class="loading-cat">🐾</div>
+      <strong>Preparando tu sorpresa</strong>
+      <span id="loadingStatus">Cargando… 0%</span>
+      <div><i id="loadingBar"></i></div>
+    </section>
+
+    <div class="chapter" id="chapter">CAPÍTULO I · LA PUERTA</div>
+    <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+    <section class="intro" id="intro">
+      <p class="kicker">UNA PEQUEÑA HISTORIA</p>
+      <h1>Hay regalos que<br>no vienen en una caja.</h1>
+      <div class="permission-note">
+        <strong>Antes de comenzar</strong>
+        <span>Esta historia usa el movimiento del teléfono y el micrófono para dos sorpresas interactivas.</span>
+        <small id="permissionStatus">Los permisos se solicitarán una sola vez.</small>
+      </div>
+      <button id="begin" type="button"><span>Preparar y entrar</span><b>→</b></button>
+    </section>
+
+    <div class="gesture-hint" id="openHint" hidden>
+      <span class="hand">☝</span><span>Desliza para abrir</span><i></i>
+    </div>
+
+    <div class="gesture-surface" id="gestureSurface" hidden aria-label="Zona interactiva">
+      <div class="gesture-meter"><i id="gestureMeter"></i></div>
+      <button id="gestureFallback" type="button">Abrir tarjeta</button>
+    </div>
+
+    <div class="pull-hint" id="pullHint" hidden>
+      <i></i><span>Sostén y jala</span>
+    </div>
+
+    <div class="gift-hint" id="giftHint" hidden>
+      <i class="gift-hand">☝</i><span>Un regalo espera</span><strong id="giftCount">Toca la caja · 0/5</strong><b></b>
+    </div>
+
+    <div class="shake-hint" id="shakeHint" hidden>
+      <i>▯</i><span>Agita tu teléfono</span><b></b>
+    </div>
+
+    <section class="dialogue" id="dialogue" hidden aria-live="polite">
+      <div class="narrator">NARRADOR</div>
+      <p id="dialogueText"></p>
+      <button id="dialogueNext" aria-label="Continuar">⌄</button>
+    </section>
+
+    <div class="page-turn-sheet" id="pageTurnSheet" hidden aria-hidden="true"></div>
+    <div class="celebration-fx" id="celebrationFx" hidden aria-hidden="true"></div>
+    <section class="birthday-page" id="birthdayPage" hidden>
+      <span id="birthdayEyebrow">UNA CELEBRACIÓN MUY ESPECIAL</span>
+      <div class="birthday-message" id="birthdayMessage"></div>
+      <small id="birthdayFootnote">Una historia contada con muchos miaubrazos</small>
+    </section>
+
+    <div class="finale" id="finale" hidden>
+      <span>✦ &nbsp; PARA TI &nbsp; ✦</span>
+      <h2>Feliz<br>cumpleaños</h2>
+      <p>Que este nuevo capítulo esté lleno de cosas que valga la pena recordar.</p>
+      <button id="again">Volver a vivirlo</button>
+    </div>
+  </main>
+
+  <aside class="rotate-lock" aria-label="Gira tu dispositivo">
+    <div>↻</div><h2>Esta historia se lee de pie</h2><p>Gira tu teléfono para continuar.</p>
+  </aside>
+  <noscript>Necesitas activar JavaScript para abrir esta tarjeta.</noscript>
+  <script type="module" src="/cumpleanos.js"></script>
+</body>
+</html>
