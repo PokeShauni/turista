@@ -27,9 +27,11 @@ const REFERENCE_RENTS={
   38000:[4500,15500,41500,114000,152000,190000]
 };
 const property=(name,price,group)=>{const rents=REFERENCE_RENTS[price]||[.12,.4,1.1,3,4,5].map(rate=>round500(price*rate)),houseCost=Math.max(5000,Math.round((price*.5)/5000)*5000);return{type:'property',name,price,group,rent:rents[0],mortgage:price/2,houseCost,hotelCost:houseCost,rents}};
-const AIRLINE_RENTS=[5000,10000,25000,50000],AIRLINE_DIPLOMATIC_BOOST=[1,2,4.4],DIPLOMATIC_MULTIPLIERS={single:[1000,1500,2500,5000,9000],pair:[4000,6000,9000,12000,18000]};
-const airline=name=>({type:'transport',name,group:'airlineNetwork',collection:'worldNetwork',price:20000,rent:5000,transportRents:AIRLINE_RENTS,diplomaticBoosts:AIRLINE_DIPLOMATIC_BOOST});
-const diplomatic=name=>({type:'diplomatic',name,group:'diplomaticNetwork',collection:'worldNetwork',price:20000,rentMultiplier:1000,pairRentMultiplier:4000,airlineMultipliers:DIPLOMATIC_MULTIPLIERS});
+// La red mundial conserva una ventaja por colección, pero sus bonos cruzados
+// no deben superar por sí solos a los bloques de destinos desarrollados.
+const AIRLINE_RENTS=[4000,8000,16000,32000],AIRLINE_DIPLOMATIC_BOOST=[1,1.5,3.125],DIPLOMATIC_MULTIPLIERS={single:[500,750,1000,1500,2000],pair:[1500,2000,2500,3500,5000]};
+const airline=name=>({type:'transport',name,group:'airlineNetwork',collection:'worldNetwork',price:20000,rent:AIRLINE_RENTS[0],transportRents:AIRLINE_RENTS,diplomaticBoosts:AIRLINE_DIPLOMATIC_BOOST});
+const diplomatic=name=>({type:'diplomatic',name,group:'diplomaticNetwork',collection:'worldNetwork',price:20000,rentMultiplier:DIPLOMATIC_MULTIPLIERS.single[0],pairRentMultiplier:DIPLOMATIC_MULTIPLIERS.pair[0],airlineMultipliers:DIPLOMATIC_MULTIPLIERS});
 const BOARD = [
   {type:'start',name:'SALIDA'},
   property('Marruecos',12000,'africa'), property('Egipto',15000,'africa'),
